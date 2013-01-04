@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <org.jenkins.ci.plugins.html5__notifier.JobPropertyImpl plugin="html5-notifier-plugin@1.2">
+      <skip>false</skip>
+    </org.jenkins.ci.plugins.html5__notifier.JobPropertyImpl>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <com.cwctravel.hudson.plugins.extended__choice__parameter.ExtendedChoiceParameterDefinition plugin="extended-choice-parameter@0.5">
+          <name>hostname</name>
+          <description></description>
+          <quoteValue>false</quoteValue>
+          <type>PT_MULTI_SELECT</type>
+          <value></value>
+          <propertyFile>/var/lib/jenkins/property_file</propertyFile>
+          <propertyKey>hostname</propertyKey>
+          <defaultValue></defaultValue>
+          <defaultPropertyFile></defaultPropertyFile>
+          <defaultPropertyKey></defaultPropertyKey>
+        </com.cwctravel.hudson.plugins.extended__choice__parameter.ExtendedChoiceParameterDefinition>
+        <com.cwctravel.hudson.plugins.extended__choice__parameter.ExtendedChoiceParameterDefinition plugin="extended-choice-parameter@0.5">
+          <name>version</name>
+          <description></description>
+          <quoteValue>false</quoteValue>
+          <type>PT_SINGLE_SELECT</type>
+          <value></value>
+          <propertyFile>/var/lib/jenkins/property_file</propertyFile>
+          <propertyKey>version</propertyKey>
+          <defaultValue></defaultValue>
+          <defaultPropertyFile></defaultPropertyFile>
+          <defaultPropertyKey></defaultPropertyKey>
+        </com.cwctravel.hudson.plugins.extended__choice__parameter.ExtendedChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cd ~/groundwork-qa/scripts/fabric
+fab -u root --password=m3t30r1t3 -H $hostname setup download</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.3.1">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+  </buildWrappers>
+</project>
