@@ -6,12 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-
-edition = "groundworkenterprise"
-groundwork_version = `s3cmd ls s3://Groundwork/ |grep ${edition}- |tail -1 |awk \'{print $4}\'`
-file_name = groundwork_version.split('/')[3]
-file_name = file_name.gsub("\n","")
-
 bash "install groundwork" do
 	not_if { File.exists?('/usr/local/groundwork') }
 	user "root"
