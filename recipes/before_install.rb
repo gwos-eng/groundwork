@@ -5,12 +5,13 @@ template "/etc/sysctl.conf" do
 end
 
 edition = "groundworkenterprise"
-groundwork_version = `s3cmd ls s3://Groundwork/ |grep ${edition}- |tail -1 |awk \'{print $4}\'`
-file_name = groundwork_version.split('/')[3]
-default["groundwork"]["file_name"] = file_name.gsub("\n","")
+node.set["groundwork"]["s3_location"] = `s3cmd ls s3://Groundwork/ |grep ${edition}- |tail -1 |awk \'{print $4}\'`
+if File.exists?('/home/ubuntu/.s3cmd')
+	node.set["groundwork"]["file_name"] = node["groundwork"]["s3_location"].split('/')[3].gsub("\n","")
+end
 
-remote_file "/home/ubuntu/#{file_name}" do
-        source node["groundwork"]["build_url"] + filename
+remote_file "/home/ubuntu/#{node["groundwork"]["file_name"]}" do
+        source node["groundwork"]["build_url"] + node["groundwork"]["file_name"] 
         mode "0644"
         action :create_if_missing
 end
