@@ -12,12 +12,12 @@ ruby_block "create variables" do
         node.set["gourndowkr"]["build_url"] = "https://s3.amazonaws.com/Groundwork/" + node["groundwork"]["file_name"]
     end
     action :create
+    notifies :create_if_missing, "remote_file[Groundwork File]"
 end
 
-remote_file "/home/ubuntu/#{node["groundwork"]["file_name"]}" do
+remote_file "Groundwork File" do
+    path "/home/ubuntu/#{node["groundwork"]["build_url"]}"
     source node["groundwork"]["build_url"]
     mode "0644"
-    action :create_if_missing
+    action :nothing
 end
-
-
