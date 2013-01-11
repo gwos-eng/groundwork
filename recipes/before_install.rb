@@ -16,7 +16,7 @@ ruby_block "create variables" do
 end
 
 remote_file "Groundwork File" do
-    path "/home/ubuntu/#{node["groundwork"]["build_url"]}"
+    path "/home/ubuntu/#{node["groundwork"]["file_name"]}"
     source node["groundwork"]["build_url"]
     mode "0644"
     action :nothing
